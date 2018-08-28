@@ -1,0 +1,1184 @@
+<meta http-equiv="cache-control" content="max-age=0" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+<meta http-equiv="pragma" content="no-cache" />
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>(ARCOS) WepSIM</title>
+
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=2.2, minimum-scale=1, width=device-width">
+
+    <script src="external/jquery.min.js"></script>
+    <script src="external/jquery-ui.min.js"></script>
+    <script>
+        $(document).bind("mobileinit", function() {
+            $.mobile.defaultPageTransition = "none";
+            $.mobile.defaultDialogTransition = "none";
+        });
+    </script>
+    <script src="external/jquery.mobile-1.4.5.min.js"></script>
+
+    <link rel="stylesheet" href="external/jquery.mobile-1.4.5.min.css">
+    <style>
+    .ui-panel-inner {
+        position: absolute;
+        top: 1px;
+        left: 0;
+        right: 0;
+        bottom: 0px;
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    textarea.ui-input-text { 
+        height: inherit !important
+    }
+
+    .ui-icon-reset:after {
+	background-image: url("images/reset.svg");
+        background-repeat: no-repeat;
+        background-size: 15px 15px;
+    }
+
+    /* http://stackoverflow.com/questions/10814178/css-performance-relative-to-translatez0 */
+    .trick-hwacceleration {
+        -webkit-transform: translatez(0);
+        -moz-transform: translatez(0);
+        -ms-transform: translatez(0);
+        -o-transform: translatez(0);
+        transform: translatez(0);
+    }
+    </style>
+
+    <link  href="external/external.min.css" rel="stylesheet">
+    <script src="external/external.min.js"></script>
+    <script src="examples/examples.js"></script>
+
+    <script src="min.sim_all.js"></script>
+    <script src="min.sim_hw.js"></script> 
+    <script src="min.wepsim.js"></script>
+
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-80849772-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <!-- End Google Analytics -->
+</head>
+
+
+<body>
+
+<div data-role="page" id="main1">
+
+	<div data-role="header" data-position="fixed" data-disable-page-zoom="false" data-theme="a">
+                <div id="button_bar" data-role="controlgroup" data-type="horizontal" class="ui-btn-left">
+                    <a href="#about1" data-rel="popup" data-position-to="window"><img alt="ARCOS logo" src="images/arcos.svg" height="40"></a>
+                </div>
+                <span class="ui-title"><b>WepSIM</b> <span class="badge"><div class="wsversion">X</div></span> / Simulator</span>
+		<div id="action_bar" data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+                    <a href="#actions_panel" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">Menu</a>
+		</div>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+
+            <div class="row">
+                <div class="col-md-8" style="padding:0 0 0 0;">
+		    <div data-role="tabs" id="tabs2">
+    		      <div data-role="navbar" id="tabsnav2" class="ui-responsive">
+		        <ul>
+		          <li style="clear:none;width:50% !important">
+                              <a id="tab26" href="#eltos_cpu" 
+                                 onclick="if (is_drawing() == false)
+                                              $('#slider2d').toggle(); 
+                                          start_drawing(); 
+                                          refresh();">Processor</a>
+                          </li>
+		          <li style="clear:none;width:50% !important">
+                              <a id="tab24" href="#eltos_dbg"  
+                                 onclick="stop_drawing(); 
+                                          var o1 = show_asmdbg_pc();
+                                          var obj_byid = $('#asm_debugger_container');
+                                          if (typeof o1[0] == 'undefined') 
+                                              return;
+                                          obj_byid[0].scrollTop = o1[0].offsetTop;">Assembly Debugger</a>
+                          </li>
+		        </ul>
+		      </div>
+		      <div id="eltos_cpu" class="ui-body-d ui-content" style="padding:10 0 10 0">
+                           <div class="container-fluid" style="padding:0 0 0 0">
+			     <div  id="slider2d" style="display: hidden;">
+			     <form id="slider2f" class="full-width-slider" style="margin:0 20 20 -35">
+				 <input aria-label="Show CPU/CU" type="range" name="slider2" id="slider2" 
+                                        min="0" max="100" value="55" step="5"
+				        data-show-value="false"
+                                        onchange="set_cpu_cu_size('#eltos_cpu_a', '#eltos_cpu_b', this.value);
+					          set_cfg('CPUCU_size', this.value); 
+                                                  save_cfg();"
+                                        style="display:none;">
+			     </form>
+			     </div>
+			     <div class="ui-grid-a">
+				<div class="ui-block-a" id="eltos_cpu_a" style="padding:0 0 0 0; width:60%">
+				    <object id="svg_p" data="images/processor6.svg" type="image/svg+xml">
+					Your browser doesn't support SVG
+				    </object>
+				    <img alt="fire" id="internalbus_fire" src="images/fire.gif" height=50 style="position:absolute; top:55%; left:5%;  display:none;">
+				    <img alt="fire" id="databus_fire"     src="images/fire.gif" height=50 style="position:absolute; top:23%; left:25%; display:none;">
+				</div>
+				<div class="ui-block-b" id="eltos_cpu_b" style="padding:0 0 0 0; width:40%">
+				    <object id="svg_cu" data="images/controlunit6.svg" type="image/svg+xml">
+					Your browser doesn't support SVG
+				    </object>
+				</div>
+			     </div>
+                           </div>
+		      </div>
+		      <div id="eltos_dbg"  class="ui-body-d ui-content">
+			   <center>
+		           <div id="asm_table" style="overflow-x:auto;">
+		   	   <table class='table ui-responsive ui-table' style="margin-bottom:0px; min-width:700px;">
+		   	   <thead>
+			   <tr>
+		   <th width=1%>
+		   <a href="#checkboxespopup" data-rel="popup">&plusmn;</a>
+		   <div data-role="popup" id="checkboxespopup">
+		       <label><input aria-label="Show breakpoint"         type="checkbox" value="1" id="asm_break"  name="asm_break" checked="checked"><span>breakpoints</span></label>
+		       <label><input aria-label="Show address"            type="checkbox" value="1" id="asm_addr"   name="asm_addr"  checked="checked"><span>address</span></label>
+		       <label><input aria-label="Show label"              type="checkbox" value="1" id="asm_label1" name="asm_label1" checked="checked"><span>labels</span></label>
+		       <label><input aria-label="Show instruction"        type="checkbox" value="1" id="asm_ins"    name="asm_ins"   checked="checked"><span>assembly</span></label>
+		       <label><input aria-label="Show label"              type="checkbox" value="1" id="asm_label2" name="asm_label2" checked="checked"><span>labels</span></label>
+		       <label><input aria-label="Show pseudo-instruction" type="checkbox" value="1" id="asm_pins"   name="asm_pins"  checked="checked"><span>pseudo</span><span class="hidden-xs">-instructions</span></label>
+		   </div>
+		   </th>
+			   <th width=10% class="asm_break"><span>break</span><span class="hidden-xs"><small>points</small></span></th>
+			   <th width=15% class="asm_addr"><span>addr</span><span class="hidden-xs">ess</span></th>
+                           <th width=10% class="asm_label1" align=right><span>labels</span></th>
+                           <th width=25% class="asm_ins"    align=left><span>assembly</span></th>
+                           <th width=10% class="asm_label2" align=right><span>labels</span></th>
+                           <th width=20% class="asm_pins"   align=left><span>pseudo</span><span class="hidden-xs"><small>instructions</small></span></th>
+			   </tr>
+			   </thead>
+			   </table>
+		   	   </div>
+			   </center>
+
+		           <div id="asm_debugger_container" 
+                                style="overflow-y:auto; overflow-x:auto; height:70vh !important;">
+                                <div id="asm_debugger" style="min-width:700px;">
+                                <br>
+                                <ol>
+                                <li>Load the microcode to be used.</li>
+                                    <ul>
+                                    <li>You can use an example of microcode, load it from a file or you can edit one.</li>
+                                    </ul>
+                                <br>
+                                <li>Load the assembly to be used.</li>
+                                    <ul>
+                                    <li>You can use an assembly example, load it from a file or you can edit one.</li>
+                                    </ul>
+                                <br>
+                                <li>Come back to the simulator in order to execute the microcode+assembly loaded before.</li>
+                                    <ul>
+                                    <li>Each step could be executed at microinstruction or instruction level.</li>
+                                    </ul>
+                                </ol>
+                                </div>
+		           </div>
+		      </div>
+	    	    </div>
+                </div>
+
+                <div class="col-md-4" style="padding:0 8px 0 0px;">
+
+                    <div class="btn-toolbar" role="toolbar" id="sim_toolbar" style="padding: 0 0px 10px 0px;">
+			<div class="btn-group btn-group-justified" role="group">
+			    <a          href="#" style="background-color: #CCCCCC"
+			       class="ui-btn btn-group ui-corner-all ui-btn-inline ui-btn-a ui-icon-reset   ui-btn-icon-top ui-mini"
+			       onclick="wepsim_execute_reset();">Reset</a>
+			    <a          href="#" style="background-color: #CCCCCC"
+			       class="ui-btn btn-group ui-corner-all ui-btn-inline ui-btn-a ui-icon-arrow-r ui-btn-icon-top ui-mini"
+			       onclick="wepsim_execute_microinstruction();">&#181;Instruction</a>
+			    <a          href="#" style="background-color: #CCCCCC"
+			       class="ui-btn btn-group ui-corner-all ui-btn-inline ui-btn-a ui-icon-arrow-r ui-btn-icon-top ui-mini"
+			       onclick="wepsim_execute_instruction();">Instruction</a>
+			    <a id="qbp" href="#" style="background-color: #CCCCCC"
+			       class="ui-btn btn-group ui-corner-all ui-btn-inline ui-btn-a ui-icon-carat-r ui-btn-icon-top ui-mini"
+			       onclick="wepsim_execute_toggle_play('#qbp'); return false;">Run</a>
+			    <a id="ib1" href="#" style="background-color: #D4DB17; -webkit-text-shadow: none; text-shadow: none;"
+			       class="ui-btn btn-group ui-corner-all ui-btn-inline ui-btn-a ui-icon-info ui-btn-icon-top ui-mini"
+			       onclick="$('#help1_ref').data('relative','#help_simulator_screens'); show_help1();">Help</a>
+                        </div>
+                    </div>
+
+		    <div data-role="tabs" id="tabs1">
+    		      <div data-role="navbar" id="tabsnav1" class="ui-responsive">
+		        <ul>
+		          <li                    style="clear:none;width:33% !important"><a id="tab14" href="#mp" onclick="show_memories_values();">Memory</a></li>
+		          <li                    style="clear:none;width:33% !important"><a id="tab12" href="#con">Console</a></li>
+		          <li class="ui-block-a" style="clear:none;width:33% !important;border:1px solid #ddd;"><a id="tab15" href="#io">Statistics</a></li>
+                          <br>
+		          <li style="           width:33% !important"><a id="tab11" href="#all" class="ui-btn-active">Registers</a></li>
+		          <li style="clear:none;width:33% !important"><a id="tab16" href="#mc" onclick="show_memories_values();">Control Memory</a></li>
+		          <li style="clear:none;width:33% !important"><a id="tab13" href="#config">Configuration</a></li>
+		        </ul>
+		      </div>
+		      <div id="all"  class="ui-body-d ui-content" style="padding: 15 0px 0 0px;">
+		         <div id="states_ALL"          style="width: inherit; overflow-y: auto;"></div>
+			 <br style="height:0; width:100%; font-size:0; margin:5; padding:0; border:0; display:block;">
+		         <div id="states_BR"           style="width: inherit; overflow-y: auto;"></div>
+		      </div>
+	    	      <div id="config"  class="ui-body-d ui-content" style="padding:14 14 0 14;">
+		         <div id="config_ALL"          style="width: inherit; overflow-y: auto;"></div>
+		      </div>
+		      <div id="mp"   class="ui-body-d ui-content">
+		         <div id="memory_MP"           style="height:60vh; width: inherit; overflow-y: scroll;"></div>
+		      </div>
+		      <div id="mc"   class="ui-body-d ui-content">
+		         <div id="memory_MC"           style="height:60vh; width: inherit; overflow-y: scroll;"></div>
+		      </div>
+		      <div id="con"  class="ui-body-d ui-content">
+                         <img alt="monitor" height=55 src="images/monitor2.png">
+		         <textarea aria-label="monitor"  style="min-width:90%; overflow-y:auto;" 
+                                   placeholder="WepSIM" id="kdb_con" rows=10 readonly></textarea>
+                         <img alt="keyboard" height=35 src="images/keyboard1.png">
+		         <textarea aria-label="keyboard" style="min-width:90%; overflow-y:auto;" 
+                                   placeholder="WepSIM" id="kdb_key" rows=2></textarea>
+		      </div>
+		      <div id="io"  class="ui-body-d ui-content">
+		         <div id="io_ALL"              style="width: inherit; overflow-y: auto;"></div>
+		      </div>
+	    	    </div>
+                </div>
+            </div>
+
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+
+<div data-role="page" id="main3">
+
+	<div data-role="header" data-position="fixed" data-disable-page-zoom="false" data-theme="a">
+                <div id="button_bar" data-role="controlgroup" data-type="horizontal" class="ui-btn-left">
+                    <a href="#about1" data-rel="popup" data-position-to="window"><img alt="ARCOS logo" src="images/arcos.svg" height="40"></a>
+                </div>
+                <span class="ui-title"><b>WepSIM</b> <span class="badge"><div class="wsversion">X</div></span> / Microcode</span>
+		<div id="action_bar" data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+                    <a href="#actions_panel" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">Menu</a>
+		</div>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+
+		<div id="lsload" 
+                     data-role="popup" data-overlay-theme="a" data-theme="a" data-dismissible="false">
+		    <div data-role="header" data-theme="a">
+		    <h1>Microcode</h1>
+		    </div>
+		    <div role="main" class="ui-content">
+			<h3>Please select the file to be loaded:</h3>
+			<p><input aria-label="file to load" type="file" id="fileToLoad" /></p>
+			<center>
+			<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Cancel</a>
+                        <button class="ui-btn ui-btn-b ui-btn-inline" 
+                                onclick="var fileToLoad = document.getElementById('fileToLoad').files[0];
+					 wepsim_load_from_file(fileToLoad, inputfirm);
+                                         $('#lsload').popup('close');">Load from File</button>
+                        </center>
+		    </div>
+		</div>
+
+		<div id="lssave" 
+                     data-role="popup" data-overlay-theme="a" data-theme="a" data-dismissible="false">
+		    <div data-role="header" data-theme="a">
+		    <h1>Save Page</h1>
+		    </div>
+		    <div role="main" class="ui-content">
+			<h2>Please write the file name where Microcode will be saved:</h2>
+			<p><input aria-label="filename to save content" id="inputFileNameToSaveAs" style="min-width: 90%;"/></p>
+			<center>
+			<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Cancel</a>
+                        <button class="ui-btn ui-btn-b ui-btn-inline" 
+                                onclick="if (confirm('Do you want me to save the current Control Memory contents rather than the editor contents?.\n\n' + 
+                                                     'Please notice three things:\n' +
+                                                     '* The current Control Memory will replace the editor contents.\n' +
+                                                     '* The comments outside the microcode will be removed.\n' +
+                                                     '* Pseudo-instructions will be not included.'))
+                                         {
+					     var SIMWARE = get_simware() ;
+					     var simware_as_text = saveFirmware(SIMWARE);
+					     if (simware_as_text.trim() == '')
+						  alert('The Microcode loaded in memory is empty!\n' + 
+							'Please load a Microcode first in memory in order to save it.');
+					     else inputfirm.setValue(simware_as_text);
+                                             var fileNameToSaveAs = document.getElementById('inputFileNameToSaveAs').value;
+                                             wepsim_save_to_file(inputfirm, fileNameToSaveAs);
+					 }">Save control memory to File</button>
+                        <button class="ui-btn ui-btn-b ui-btn-inline" 
+                                onclick="var fileNameToSaveAs = document.getElementById('inputFileNameToSaveAs').value;
+                                         wepsim_save_to_file(inputfirm, fileNameToSaveAs);">Save Editor content to File</button>
+                        </center>
+		    </div>
+		</div>
+
+                <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group btn-group-justified" role="group">
+		            <a href="#lsload" style="background-color: #CCCCCC"
+				   class="ui-btn navbar-btn ui-corner-all ui-btn-inline ui-btn-a ui-icon-back    ui-btn-icon-left ui-mini col-xs-3 col-md-1 col-lg-1"
+				   data-rel="popup" data-position-to="window" data-transition="pop">Load</a>
+		            <a href="#lssave" style="background-color: #CCCCCC"
+				   class="ui-btn navbar-btn ui-corner-all ui-btn-inline ui-btn-a ui-icon-forward ui-btn-icon-left ui-mini col-xs-3 col-md-1 col-lg-1"
+				   data-rel="popup" data-position-to="window" data-transition="pop">Save</a>
+		            <a href="#"       style="background-color: #CCCCCC"
+				   class="ui-btn navbar-btn ui-corner-all ui-btn-inline ui-btn-a ui-icon-refresh ui-btn-icon-left ui-mini col-xs-4 col-md-1 col-lg-1"
+				   data-transition="none" data-inline="true"
+				   onclick="var textToMCompile = inputfirm.getValue();
+                                            compileFirmware(textToMCompile, true);
+                                            $('#asm_debugger').html('<br>After updates on the microcode, assembler has to be compiled against it.');">&#181;compile</a>
+		            <a href="#"       style="background-color: #CCCCCC"
+				   class="ui-btn navbar-btn ui-corner-all ui-btn-inline ui-btn-a ui-icon-refresh ui-btn-icon-left ui-mini col-xs-9 col-md-2 col-lg-2"
+				   data-transition="none" data-inline="true"
+				   onclick="var textToMCompile = inputfirm.getValue();
+                                            var ok = compileFirmware(textToMCompile, true);
+                                            if (true == ok) {
+                                                $.mobile.pageContainer.pagecontainer('change','#main4');
+                                            }">&#181;compile and go assembly</a>
+
+		            <a href="#" style="background-color: #DDDDDD"
+				   class="ui-btn navbar-btn ui-corner-all ui-btn-inline ui-btn-a ui-icon-arrow-u ui-btn-icon-left ui-mini col-xs-9 col-md-2 col-lg-2 ui-shadow"
+				   onclick="var textToMCompile = inputfirm.getValue();
+                                            var ok = compileFirmware(textToMCompile, true);
+                                            if (true == ok) {
+                                                showBinaryMicrocode('#bin1','#compile_results');
+                                            }">Show co2&#181;addr + control memory</a>
+
+                            <a href="#" style="background-color: #D4DB17"
+                                   class="ui-btn navbar-btn ui-corner-all ui-btn-inline ui-btn-a ui-icon-info     ui-btn-icon-left  ui-mini col-xs-6 col-md-2 col-lg-2"
+				   onclick="$('#help1_ref').data('relative','');
+                                            $('#iframe_help1').html('<object id=svg_p2 data=\'images/cpu6.svg?time=20161202\' type=image/svg+xml>Your browser does not support SVG</object>');
+                                            $('#help1').trigger('updatelayout');
+                                            $('#help1').popup('reposition', {positionTo: 'window'});
+					    $('#help1').popup('open');"
+                                   >Hardware Summary</a>
+
+                            <a href="#" style="background-color: #D4DB17"
+                                   class="ui-btn navbar-btn ui-corner-all ui-btn-inline ui-btn-a ui-icon-info    ui-btn-icon-left ui-mini col-xs-4 col-md-1 col-lg-1"
+				   onclick="$('#help1_ref').data('relative','#help_firmware_format'); show_help1();"
+                                   >Help</a>
+		</div>
+		</div>
+
+		<div id="t3_firm"  class="ui-body-d ui-content" style="position:relative;">
+		     <textarea aria-label="microcode" style="min-width:90%; overflow-y:auto;"
+                               placeholder="Please select 'Example' or 'Load' first in order to have an initial Microcode."
+                               id="inputFirmware" rows=20></textarea>
+		</div>
+
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+
+<div data-role="page" id="main4">
+
+	<div data-role="header" data-position="fixed" data-disable-page-zoom="false" data-theme="a">
+                <div id="button_bar" data-role="controlgroup" data-type="horizontal" class="ui-btn-left">
+                    <a href="#about1" data-rel="popup" data-position-to="window"><img alt="ARCOS logo" src="images/arcos.svg" height="40"></a>
+                </div>
+                <span class="ui-title"><b>WepSIM</b> <span class="badge"><div class="wsversion">X</div></span> / Assembly</span>
+		<div id="action_bar" data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+                    <a href="#actions_panel" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">Menu</a>
+		</div>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+
+		<div id="lsload2" 
+                     data-role="popup" data-overlay-theme="a" data-theme="a" data-dismissible="false">
+		    <div data-role="header" data-theme="a">
+		    <h1>Assembler</h1>
+		    </div>
+		    <div role="main" class="ui-content">
+			<h3>Please select the file to be assembled:</h3>
+			<p><input aria-label="file to load" type="file" id="fileToLoad2" /></p>
+			<center>
+			<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Cancel</a>
+                        <button class="ui-btn ui-btn-b ui-btn-inline" 
+                                onclick="var fileToLoad = document.getElementById('fileToLoad2').files[0];
+                                         wepsim_load_from_file(fileToLoad,inputasm);
+                                         $('#lsload2').popup('close');">Load from File</button>
+                        </center>
+		    </div>
+		</div>
+
+		<div id="lssave2" 
+                     data-role="popup" data-overlay-theme="a" data-theme="a" data-dismissible="false">
+		    <div data-role="header" data-theme="a">
+		    <h1>Save Page</h1>
+		    </div>
+		    <div role="main" class="ui-content">
+			<h2>Please write the file name where assembly will be saved:</h2>
+			<p><input aria-label="filename to save content" id="inputFileNameToSaveAs2" style="min-width: 90%;"/></p>
+			<center>
+			<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Cancel</a>
+                        <button class="ui-btn ui-btn-b ui-btn-inline" 
+                                onclick="var fileNameToSaveAs = document.getElementById('inputFileNameToSaveAs2').value;
+                                         wepsim_save_to_file(inputasm, fileNameToSaveAs);">Save to File</button>
+                        </center>
+		    </div>
+		</div>
+
+                <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group btn-group-justified" role="group">
+		            <a href="#lsload2" style="background-color: #CCCCCC"
+				   class="ui-btn navbar-btn ui-corner-all ui-btn-inline ui-btn-a ui-icon-back     ui-btn-icon-left ui-mini col-xs-3 col-md-1 col-lg-1"
+				   data-rel="popup" data-position-to="window" data-transition="pop" data-inline="true">Load</a>
+		            <a href="#lssave2" style="background-color: #CCCCCC"
+				   class="ui-btn navbar-btn ui-corner-all ui-btn-inline ui-btn-a ui-icon-forward  ui-btn-icon-left ui-mini col-xs-3 col-md-1 col-lg-1"
+				   data-rel="popup" data-position-to="window" data-transition="pop" data-inline="true">Save</a>
+		            <a href="#" style="background-color: #CCCCCC"
+				   class="ui-btn navbar-btn ui-corner-all ui-btn-inline ui-btn-a ui-icon-refresh  ui-btn-icon-left ui-mini col-xs-4 col-md-1 col-lg-1"
+				   data-transition="none" data-inline="true"
+				   onclick="var textToCompile = inputasm.getValue() ;
+                                            var ok = compileAssembly(textToCompile, true);">Compile</a>
+		            <a href="#" style="background-color: #CCCCCC"
+				   class="ui-btn navbar-btn ui-corner-all ui-btn-inline ui-btn-a ui-icon-refresh  ui-btn-icon-left ui-mini col-xs-9 col-md-2 col-lg-2"
+				   data-transition="none" data-inline="true"
+				   onclick="var textToCompile = inputasm.getValue() ;
+                                            var ok = compileAssembly(textToCompile, true);
+                                            if (true == ok) {
+                                                $.mobile.pageContainer.pagecontainer('change','#main1');
+                                            }">Compile and go simulator</a>
+
+		            <a href="#" style="background-color: #DDDDDD"
+				   class="ui-btn navbar-btn ui-corner-all ui-btn-inline ui-btn-a ui-icon-arrow-u  ui-btn-icon-left ui-mini col-xs-9 col-md-2 col-lg-2 ui-shadow"
+				   onclick="var textToCompile = inputasm.getValue();
+                                            var ok = compileAssembly(textToCompile, true);
+                                            if (true == ok) {
+                                                showBinaryCode('#bin1','#compile_results');
+                                            }">Show Main Memory</a>
+                            <a href="#" style="background-color: #D4DB17"
+                                   class="ui-btn navbar-btn ui-corner-all ui-btn-inline ui-btn-a ui-icon-info     ui-btn-icon-left  ui-mini col-xs-5 col-md-1 col-lg-1"
+				   onclick="$('#help1_ref').data('relative','#help_assembly_format'); show_help1();">Help</a>
+		</div>
+		</div>
+
+		<div id="t4_asm"   class="ui-body-d ui-content">
+		        <textarea aria-label="Assembly" style="min-width:90%; overflow-y:auto;"
+                                  placeholder="Please select 'Load' first to have the assembly code to work with."
+			          id="inputAssembly" rows="20"></textarea>
+		</div>
+
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+
+<div data-role="panel" id="actions_panel" data-display="overlay" data-position="right" data-theme="a" 
+     style="width:19em; min-width:17em;">
+
+        <table border=0 height=100% width=100%>
+        <tr>
+        <td valign=top>
+
+	<div data-role="collapsible-set">
+	    <div data-role="collapsible" data-collapsed="false" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
+	    <h3>WorkSpaces</h3>
+	    <p>
+	    <ul id="listview_1" data-role="listview" data-inset="false" data-theme="a" data-divider-theme="b">
+		    <li><a id="tab21" href="#" style="background-color: lightgray"
+			   onclick="$.mobile.pageContainer.pagecontainer('change','#main3');"><h2>Microcode</h2></a></li>
+		    <li><a id="tab24" href="#" style="background-color: lightgray"
+			   onclick="$.mobile.pageContainer.pagecontainer('change','#main4');"><h2>Assembly</h2></a></li>
+		    <li><a id="tab25" href="#" style="background-color: lightgray"
+			   onclick="$.mobile.pageContainer.pagecontainer('change','#main1');"><h2>Simulator</h2></a></li>
+	    </ul>
+            </p>
+	    </div>
+
+	    <div data-role="collapsible" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
+	    <h3>Help</h3>
+	    <p>
+	    <ul id="listview_2" data-role="listview" data-inset="false" data-theme="a" data-divider-theme="b" data-mini="true">
+		    <li><a href="#" class="ui-btn ui-btn-icon-left ui-icon-info" style="background-color: #D4DB17;"
+			   onclick="$('#help1_ref').data('relative','#help_simulator_screens');
+			            show_help1();"><h2>Simulator usage</h2></a></li>
+		    <li><a href="#" class="ui-btn ui-btn-icon-left ui-icon-info" style="background-color: #D4DB17;"
+			   onclick="$('#help1_ref').data('relative','#help_firmware_format');
+			            show_help1();"><h2>Microcode format</h2></a></li>
+		    <li><a href="#" class="ui-btn ui-btn-icon-left ui-icon-info" style="background-color: #D4DB17;"
+			   onclick="$('#help1_ref').data('relative','#help_assembly_format');
+			            show_help1();"><h2>Assembly format</h2></a></li>
+		    <li><a href="#" class="ui-btn ui-btn-icon-left ui-icon-info" style="background-color: #D4DB17;"
+			   onclick="$('#help1_ref').data('relative','#help_simulator_arch');
+			            show_help1();"><h2>Simulator architecture</h2></a></li>
+	    </ul>
+            </p>
+	    </div>
+
+	</div>
+
+        </td>
+        </tr>
+        <tr>
+        <td>
+               <a href="#example1" data-rel="popup" data-position-to="window" style="text-align:left"
+                  class="ui-btn ui-btn-icon-left ui-icon-info">Examples</a>
+               <a href="#config1"  data-rel="popup" data-position-to="window" style="text-align:left"
+                  class="ui-btn ui-btn-icon-left ui-icon-gear">Configuration</a>
+               <a href="#about2"   data-rel="popup" data-position-to="window" style="text-align:left"
+                  class="ui-btn ui-btn-icon-left ui-icon-tag">About</a>
+        </td>
+        </tr>
+        </table>
+
+</div><!-- /panel -->
+
+
+<div data-role="popup" id="example1" style="background-color: white;"
+     data-dismissible="false" data-animate="false" data-overlay-theme="b">
+
+   <div data-role="header" data-theme="a">
+        <h1><b>Examples</b> <span class="badge btn-success"><div class="wsversion">X</div></span></h1>
+
+        <a href="#" 
+           data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" 
+           class="ui-btn-right">Close</a>
+   </div>
+
+   <div role="main" class="ui-content" style="padding: 8px 8px 8px 8px">
+
+	<div id="container-example1" class="container-fluid" 
+             style="max-width:80vw; max-height:90vh; overflow:auto;">
+        </div>
+
+   </div>
+</div>
+
+
+<div data-role="popup" id="config1" 
+     data-theme="a" data-dismissible="false" data-animate="false" data-overlay-theme="b">
+
+   <div data-role="header" data-theme="a">
+        <h1><b>Configuration</b> <span class="badge btn-success"><div class="wsversion">X</div></span></h1>
+        <a href="#" 
+           data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" 
+           class="ui-btn-right">Close</a>
+   </div>
+   <div role="main" class="ui-content" style="padding: 8px 8px 8px 8px">
+
+	<div id="bot-config1" style="max-width:85vw; overflow-x:auto;">
+	<div class="container-fluid">
+	<div class="row" style="width:1050px;">
+	  <div class="col-xs-3 col-md-4 col-lg-push-5" style="min-width:300px">
+		<div class="row">
+		  <div class="col-xs-12 col-sm-12 col-md-12">
+			  <ul class="container-fluid list-group" style="padding:0 0 0 0">
+			    <li class="list-group-item">
+				 Speed-up (slow - fast):
+				 <input type="range"
+					aria-label="Execution speed control"
+					data-show-value="false"
+					name="slider1" id="slider1"
+					min="1" max="200" value="200" step=5
+					onchange="set_cfg('DBG_delay', 1000 / this.value); save_cfg();">
+			    </li>
+			    <li class="list-group-item">
+				 <fieldset data-role="controlgroup" data-type="horizontal">
+				 Single step element in run mode:
+				 <ul>
+				 <li>
+				     <input name="radio1" id="radio1-instruction" data-mini="true"
+					    aria-label="Execution unit (instruction)"
+					    style="margin-top:-8px"
+					    onclick="set_cfg('DBG_level','instruction'); save_cfg();"
+					    value="on" type="radio">
+				     <label for="radio1-instruction"><span class="hidden-xs">Instructions</span><span class="visible-xs">Instruc.</span></label>
+				     <input name="radio1" id="radio1-microinstruction" data-mini="true"
+					    aria-label="Execution unit (microinstruction)"
+					    style="margin-top:-8px"
+					    onclick="set_cfg('DBG_level','microinstruction'); save_cfg();"
+					    value="off" type="radio">
+				     <label for="radio1-microinstruction"><span class="hidden-xs">&#181;instructions</span><span class="visible-xs">&#181;instruc.</span></label>
+				 </li>
+				 </ul>
+				 </fieldset>
+			    </li>
+			  </ul>
+		  </div>
+		</div>
+		<div class="row">
+		  <div class="col-xs-12 col-sm-12 col-md-12">
+			  <ul class="container-fluid list-group" style="padding:0 0 0 0">
+			    <li class="list-group-item">
+				 <fieldset data-role="controlgroup" data-type="horizontal">
+				 Breakpoint Icon:<br>
+				 <ul>
+				 <li>
+				    <img alt="stop icon" id="img_select1" src="images/stop_classic.gif" 
+					 style="position:absolute; left:15px; height:30px !important; width:30px !important;">
+				    <select name="select1" id="select1" 
+                                            aria-label="Breakpoint Icon"
+					    onchange="var opt = $(this).find('option:selected');
+						      var optValue = opt.val();
+						      $('#img_select1').attr('src','images/stop_' + optValue + '.gif');
+						      set_cfg('ICON_theme',optValue); save_cfg();"
+					    data-mini="true" data-native-menu="false">
+					<option value="classic">Classic</option>
+					<option value="pushpin">Push Pin</option>
+					<option value="simple">Simple</option>
+					<option value="super">Superman</option>
+					<option value="batman">Batman</option>
+					<option value="cat1">Cat</option>
+					<option value="dog1">Dog</option>
+					<option value="r2d2">R2-D2</option>
+					<option value="sw">Death Star</option>
+					<option value="bb8">BB-8</option>
+					<option value="vader1">Dark Vader</option>
+				    </select>
+				 </li>
+				 </ul>
+				 </fieldset>
+			    </li>
+			  </ul>
+		  </div>
+		</div>
+	  </div>
+
+	  <div class="col-xs-5 col-md-5 col-lg-pull-4">
+		<div class="row">
+		  <div class="col-xs-4 col-sm-4 col-md-4">
+		     <img alt="color configuration" src="images/cfg-colors.gif" width="100%">
+		  </div>
+		  <div class="col-xs-8 col-sm-8 col-md-8">
+			  <ul class="container-fluid list-group" style="padding:0 0 0 0">
+			    <li class="list-group-item">
+				 Data-path Color:
+				 <ul>
+				 <input type="color"
+					aria-label="Color for active data"
+					id="colorpicker1"
+					data-show-value="false"
+					class="noshadow"
+					onchange="set_cfg('color_data_active', $('#colorpicker1').spectrum('get')); refresh(); save_cfg();">
+				 </ul>
+			    </li>
+			    <li class="list-group-item">
+				 Signal Color:
+				 <ul>
+				 <input type="color"
+					aria-label="Color for active signal name"
+					id="colorpicker2"
+					data-show-value="false"
+					class="noshadow"
+					onchange="set_cfg('color_name_active', $('#colorpicker2').spectrum('get')); refresh(); save_cfg();">
+				 </ul>
+			    </li>
+			  </ul>
+		  </div>
+		</div>
+		<div class="row">
+		  <div class="col-xs-4 col-sm-4 col-md-4">
+		     <img alt="register file example" src="images/cfg-rf.gif" width="100%">
+		  </div>
+		  <div class="col-xs-8 col-sm-8 col-md-8">
+			  <ul class="container-fluid list-group" style="padding:0 0 0 0">
+			    <li class="list-group-item">
+				 <fieldset data-role="controlgroup" data-type="horizontal">
+				 RF display format:<br>
+				 <ul>
+				 <li>
+				     <input name="radio2" id="radio2-16" data-mini="true"
+					    aria-label="register file display format (decimal)"
+					    style="margin-top:-8px"
+					    onclick="set_cfg('RF_display_format',16); show_rf_values(); show_memories_values(); save_cfg();"
+					    value="on" type="radio">
+				     <label for="radio2-16">Hex.</label>
+				     <input name="radio2" id="radio2-10" data-mini="true"
+					    aria-label="register file display format (hexadecimal)"
+					    style="margin-top:-8px"
+					    onclick="set_cfg('RF_display_format',10); show_rf_values(); show_memories_values(); save_cfg();"
+					    value="off" type="radio">
+				     <label for="radio2-10">Dec.</label>
+				     <input name="radio2" id="radio2-8"  data-mini="true"
+					    aria-label="register file display format (octal)"
+					    style="margin-top:-8px"
+					    onclick="set_cfg('RF_display_format',8); show_rf_values(); show_memories_values(); save_cfg();"
+					    value="off" type="radio">
+				     <label for="radio2-8">Oct.</label>
+				 </li>
+				 </ul>
+				 </fieldset>
+			    </li>
+			    <li class="list-group-item">
+				 <fieldset data-role="controlgroup" data-type="horizontal">
+				 RF name nomenclature:<br>
+				 <ul>
+				 <li>
+				     <input name="radio3" id="radio3-numerical" data-mini="true"
+					    aria-label="register file display name (number)"
+					    style="margin-top:-8px"
+					    onclick="set_cfg('RF_display_name','numerical'); show_rf_names(); save_cfg();"
+					    value="on" type="radio">
+				     <label for="radio3-numerical">Numbers</label>
+				     <input name="radio3" id="radio3-logical" data-mini="true"
+					    aria-label="register file display name (user identification)"
+					    style="margin-top:-8px"
+					    onclick="set_cfg('RF_display_name','logical'); show_rf_names(); save_cfg();"
+					    value="off" type="radio">
+				     <label for="radio3-logical">Labels</label>
+				 </li>
+				 </ul>
+				 </fieldset>
+			    </li>
+			  </ul>
+		  </div>
+		</div>
+	  </div>
+
+	  <div class="col-xs-3 col-md-3">
+		<div class="row">
+		  <div class="col-xs-12 col-sm-12 col-md-12">
+			  <ul class="container-fluid list-group" style="padding:0 0 0 0">
+			    <li class="list-group-item">
+				 <fieldset data-role="controlgroup" data-type="horizontal">
+				 Editor theme:<br>
+				 <ul>
+				 <li>
+				     <input name="radio7" id="radio7-default" data-mini="true"
+					    aria-label="Editor theme (Light)"
+					    style="margin-top:-8px"
+					    onclick="set_cfg('editor_theme','default'); save_cfg();
+						     inputfirm.getWrapperElement().style['font-weight'] = 'bold';
+						     inputfirm.setOption('theme','default');
+						     inputasm.getWrapperElement().style['font-weight'] = 'bold';
+						     inputasm.setOption('theme','default');"
+					    value="default" type="radio">
+				     <label for="radio7-default">Light</label>
+				     <input name="radio7" id="radio7-blackboard" data-mini="true"
+					    aria-label="Editor theme (Dark)"
+					    style="margin-top:-8px"
+					    onclick="set_cfg('editor_theme','blackboard'); save_cfg();
+						     inputfirm.getWrapperElement().style['font-weight'] = 'normal';
+						     inputfirm.setOption('theme','blackboard');
+						     inputasm.getWrapperElement().style['font-weight'] = 'normal';
+						     inputasm.setOption('theme','blackboard');"
+					    value="blackboard" type="radio">
+				     <label for="radio7-blackboard">Dark</label>
+				 </li>
+				 </ul>
+				 </fieldset>
+			    </li>
+			    <li class="list-group-item">
+				 <fieldset data-role="controlgroup" data-type="horizontal">
+				 Editor mode:<br>
+				 <ul>
+				 <li>
+				    <select name="select2" id="select2" 
+					    aria-label="Editor mode"
+					    onchange="var opt = $(this).find('option:selected');
+						      var optValue = opt.val();
+						      set_cfg('editor_mode',optValue); save_cfg();
+						      inputfirm.setOption('keyMap',optValue);
+						      inputasm.setOption('keyMap',optValue);"
+					    data-mini="true" data-native-menu="false">
+					<option value="default">default</option>
+					<option value="vim">VIM</option>
+					<option value="emacs">Emacs</option>
+					<option value="sublime">Sublime</option>
+				    </select>
+				 </li>
+				 </ul>
+				 </fieldset>
+			    </li>
+			  </ul>
+			  <ul class="container-fluid list-group" style="padding:0 0 0 0">
+			    <li class="list-group-item">
+				 <fieldset data-role="controlgroup" data-type="horizontal">
+				 Interactive Mode:<br>
+				 <ul>
+				 <li>
+				     <input name="radio5" id="radio5-true" data-mini="true"
+					    aria-label="Is interactive: true"
+					    style="margin-top:-8px"
+					    onclick="set_cfg('is_interactive',true); save_cfg();"
+					    value="on" type="radio">
+				     <label for="radio5-true">On</label>
+				     <input name="radio5" id="radio5-false" data-mini="true"
+					    aria-label="Is interactive: false"
+					    style="margin-top:-8px"
+					    onclick="set_cfg('is_interactive',false); save_cfg();"
+					    value="off" type="radio">
+				     <label for="radio5-false">Off</label>
+				 </li>
+				 </ul>
+				 </fieldset>
+			    </li>
+			    <li class="list-group-item">
+				 <fieldset data-role="controlgroup" data-type="horizontal">
+				 Edit register file values:<br>
+				 <ul>
+				 <li>
+				     <input name="radio9" id="radio9-true" data-mini="true"
+					    aria-label="Is editable: true"
+					    style="margin-top:-8px"
+					    onclick="set_cfg('is_editable',true); save_cfg();"
+					    value="on" type="radio">
+				     <label for="radio9-true">On</label>
+				     <input name="radio9" id="radio9-false" data-mini="true"
+					    aria-label="Is editable: false"
+					    style="margin-top:-8px"
+					    onclick="set_cfg('is_editable',false); save_cfg();"
+					    value="off" type="radio">
+				     <label for="radio9-false">Off</label>
+				 </li>
+				 </ul>
+				 </fieldset>
+			    </li>
+			  </ul>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	</div>
+	</div>
+
+   </div>
+
+</div><!-- /popup -->
+
+
+<div data-role="popup" id="about1" 
+     data-theme="a" data-dismissible="false" data-animate="false" data-overlay-theme="b">
+
+   <div data-role="header" data-theme="a">
+        <h1><b>WepSIM</b> <span class="badge btn-success"><div class="wsversion">X</div></span> </h1>
+        <a href="#" 
+           data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" 
+           class="ui-btn-right">Close</a>
+   </div>
+   <div role="main" class="ui-content">
+
+        <div style="font-family: Helvetica Neue,Helvetica,Arial,sans-serif; font-size: 16px; line-height: 24px; padding-bottom: 6.4px; padding-left: 8px; padding-right: 8px; padding-top: 6.4px; max-width: 555px;">
+        <div class="row">
+        <div class="col-xs-12 col-sm-12">
+            Copyright &copy; 2015-2017 <br>
+	    <p>
+            <b>Contributors</b>: 
+<a data-toggle="tooltip1" title=" <img class='img-rounded img-responsive' alt='Photo of Javier Prieto Cepeda' src='http://163.117.148.20/wp-content/uploads/2016/05/jprieto-2-150x150.jpg'> ">Javier Prieto Cepeda</a>,
+<a data-toggle="tooltip1" title=" <img class='img-rounded img-responsive' alt='Photo of Sa'ul Alonso Monsalve' src='http://163.117.148.20/wp-content/uploads/2016/05/salonso-1-150x150.jpg'> ">Sa&uacute;l Alonso Monsalve</a>
+<br>
+            <b>Coordinators</b>: 
+<a data-toggle="tooltip1" title=" <img class='img-rounded img-responsive' alt='Photo of F'elix Garc'ia Carballeira' src='http://163.117.148.20/wp-content/uploads/2016/05/fgarcia-1-150x150.jpg'> ">F&eacute;lix Garc&iacute;a Carballeira</a>,
+<a data-toggle="tooltip1" title=" <img class='img-rounded img-responsive' alt='Photo of Alejandro Calder'on Mateos' src='http://163.117.148.20/wp-content/uploads/2016/05/acaldero-1-150x150.jpg'> ">Alejandro Calder&oacute;n Mateos</a>
+<br>
+            <p>
+            <a href="http://www.arcos.inf.uc3m.es/">ARCOS Group</a><br>
+            <a href="http://www.inf.uc3m.es/en/">Computer Science and Engineering Department</a><br>
+            <a href="http://www.uc3m.es/">Universidad Carlos III de Madrid</a><br>
+	    <p>
+        </div>
+        </div>
+
+        </div>
+
+   </div>
+
+</div><!-- /popup -->
+
+
+<div data-role="popup" id="about2" 
+     data-theme="a" data-dismissible="false" data-animate="false" data-overlay-theme="b">
+
+   <div data-role="header" data-theme="a">
+        <h1><b>About</b> <span class="badge btn-success"><div class="wsversion">X</div></span> </h1>
+        <a href="#" 
+           data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" 
+           class="ui-btn-right">Close</a>
+   </div>
+   <div role="main" class="ui-content">
+
+	<div data-role="collapsibleset" style="max-width:600px;">
+	  <div data-role="collapsible" data-collapsed="false">
+	    <h1>Platforms</h1>
+	    <p>
+	            <br class="hidden-xs">
+                    <b>WepSIM</b> for Web works with the most popular modern Web Browsers:<br class="hidden-xs">
+                    Google Chrome 50+, Mozilla Firefox 45+, Microsoft Edge 30+, and Apple Safari 10+<br>
+                    <br>
+                    An <a href="https://play.google.com/store/apps/details?id=es.uc3m.inf.arcos.wepsim">Android 5.0+ version</a> version is also available at Google Play.<br>
+                    <br>
+		    It source code is available at <a rel="external" href="https://github.com/wepsim/wepsim">https://github.com/wepsim/wepsim</a>.<br>
+	    </p>
+	  </div>
+
+	  <div data-role="collapsible">
+	    <h1>License</h1>
+	    <p>
+	            <br class="hidden-xs">
+		    <b>WepSIM (Web elemental processor SIMulator)</b> is free software: you can redistribute it and/or modify
+		    it under the terms of the GNU Lesser General Public License as published by
+		    the Free Software Foundation, either version 3 of the License, or
+		    (at your option) any later version.<br>
+                    <br>
+		    See <a rel="external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.<br>
+	    </p>
+	  </div>
+
+	  <div data-role="collapsible">
+	    <h1>Technologies</h1>
+	    <p>
+	            <br class="hidden-xs">
+		    <b>WepSIM</b> uses different technologies such as:<br>
+                    <ul>
+                    <li>Frameworks: 
+		        <a rel="external" href="https://jquerymobile.com/">Jquery Mobile</a>,
+		        <a rel="external" href="http://knockoutjs.com/">Knockout</a>,
+		        <a rel="external" href="http://getbootstrap.com/">Bootstrap</a>
+                    </li>
+                    <li>Icons: 
+		        <a rel="external" href="http://glyphicons.com/">glyphicons</a>,
+		        <a rel="external" href="http://icon-icons.com/">icon-icons</a>
+                    </li>
+                    <li>Plug-ins & extensions: 
+		        <a rel="external" href="http://bootboxjs.com/">Bootbox</a>,
+		        <a rel="external" href="http://codemirror.net/index.html">CodeMirror</a> Editor,
+		        <a rel="external" href="https://bgrins.github.io/spectrum/">Spectrum</a> ColorPicker,
+		        <a rel="external" href="https://github.com/mouse0270/bootstrap-notify">Bootstrap Notify</a>,
+		        <a rel="external" href="http://masonry.desandro.com/">Masonry</a> Grid,
+		        <a rel="external" href="http://anthonyterrien.com/knob/">Jquery Knob</a>
+                    </li>
+                    </ul>
+            </p>
+	  </div>
+	</div>
+
+   </div>
+
+</div><!-- /popup -->
+
+
+<div data-role="popup" id="help1" 
+     data-theme="a" data-dismissible="false" data-animate="false" data-overlay-theme="b">
+
+      <div data-role="header" data-theme="b" class="ui-corner-top">
+           <div data-type="horizontal" data-role="controlgroup" class="ui-btn-left">  
+             <div id="help1_ref" style="display:none;"></div>
+	     <input name="radio6" id="radio6-es" data-mini="true"
+		    aria-label="Idiom: Spanish"
+		    style="margin-top:-8px"
+		    onclick="set_cfg('ws_idiom','es'); save_cfg(); show_help1();"
+		    value="ES" type="radio">
+	     <label for="radio6-es">ES</label>
+	     <input name="radio6" id="radio6-en" data-mini="true"
+		    aria-label="Idiom: English"
+		    style="margin-top:-8px"
+		    onclick="set_cfg('ws_idiom','en'); save_cfg(); show_help1();"
+		    value="EN" type="radio">
+	     <label for="radio6-en">EN</label>
+           </div>
+           <h1>Help</h1>
+           <a href="#" 
+              data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" 
+              class="ui-btn-right">Close</a>
+      </div>
+
+      <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+              <div class="ui-body-d ui-content" style="padding: 2px 2px 2px 2px;">
+                 <div id=iframe_help1 style="height:80vh; width:80vw; max-width:1200px; overflow:auto;"></div>
+              </div>
+      </div>
+
+</div><!-- /panel -->
+
+
+<div data-role="popup" id="bin1" 
+     data-theme="a" data-dismissible="true" data-animate="false" data-overlay-theme="a">
+
+      <div data-role="header" data-theme="b" class="ui-corner-top">
+           <h1>Binary</h1>
+           <a href="#" 
+              data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" 
+              class="ui-btn-right">Close</a>
+      </div>
+
+      <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+              <div class="ui-body-d ui-content" style="padding: 2px 2px 2px 2px;">
+                 <div id=iframe_bin1 style="height:80vh; max-width:80vw; overflow:auto;">
+		   <div id="compile_results" style="padding: 16px 16px 16px 16px;">
+                        <br>
+                        <center>
+                        Loading binary, please wait... <br>
+                        WARNING: loading binary might take time on slow mobile devices.
+                        </center>
+                   </div>
+                 </div>
+              </div>
+      </div>
+
+</div><!-- /panel -->
+
+
+<script>
+    window.addEventListener("beforeunload", function (e) {
+       var confirmationMessage = "\o/";
+       (e || window.event).returnValue = confirmationMessage; // Gecko + IE
+       return confirmationMessage;                            // Webkit, Safari, Chrome
+    });
+
+    try 
+    {
+	    restore_cfg();
+
+	    $(document).ready(function()
+	    {
+		    jQuery.fx.off = true;
+
+	            $("#container-example1").html(list_examples_html(examples));
+	            $("#container-example1").enhanceWithin();
+		    $('#masonry-grid1').masonry({
+		       columnWidth:  310,
+		       itemSelector: '.grid-item',
+		       isFitWidth:   true
+		    });
+		    $(document).delegate('input[data-type="search"]',  
+                                         'keyup change',  
+                                         function () { 
+                                            setTimeout(function() { $('#masonry-grid1').masonry('layout'); }, 500); 
+                                         });
+
+		    $("#help1").enhanceWithin().popup();
+		    $("#bin1").enhanceWithin().popup();
+		    $("#about1").enhanceWithin().popup();
+		    $("#example1").enhanceWithin().popup();
+		    $("#config1").enhanceWithin().popup();
+		    $("#about2").enhanceWithin().popup();
+
+		    $("#actions_panel").panel().enhanceWithin();
+		    $(".ui-slider-input").hide();
+		    $("#listview_1").listview();
+
+		    $("#tabsnav1").navbar();
+		    $("#tabsnav2").navbar();
+
+		    $("#tabs1").tabs();
+		    $("#tabs2").tabs();
+
+		    inputfirm = CodeMirror.fromTextArea(document.getElementById("inputFirmware"), 
+                                    {
+					value: "",
+					lineNumbers: true,
+					matchBrackets: true,
+					mode: "text/x-csrc",
+					foldGutter: {
+						rangeFinder: new CodeMirror.fold.combine(CodeMirror.fold.brace, CodeMirror.fold.comment)
+					},
+					gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+				    });
+                    sim_prepare_editor(inputfirm);
+
+		    inputasm = CodeMirror.fromTextArea(document.getElementById("inputAssembly"), 
+                                    {
+					value: "",
+					lineNumbers: true,
+					matchBrackets: true,
+					extraKeys: {
+					  "Ctrl-Space": function(cm) {
+					      CodeMirror.showHint(cm, function(cm, options) {
+						      var simware = get_simware();
+						      var cur = cm.getCursor();
+						      var result = new Array();
+						      for (var i=0; i<simware.firmware.length; i++)
+							   if(simware.firmware[i].name != "begin")
+								result.push(simware.firmware[i].signatureUser);
+						      return { list: result, from: cur, to: cur };
+					      });
+					  }
+					},
+					mode: "text/x-csrc"
+				    });
+                    sim_prepare_editor(inputasm) ;
+
+		    var a = document.getElementById("svg_p");
+		    a.addEventListener("load",function() {
+			sim_prepare_svg_p();
+			init_eventlistener("svg_p");
+			refresh();
+		    }, false);
+
+		    var a = document.getElementById("svg_cu");
+		    a.addEventListener("load",function() {
+			sim_prepare_svg_cu();
+			init_eventlistener("svg_cu");
+			refresh();
+		    }, false);
+
+		    $.mobile.pageContainer.pagecontainer('change','#main1');
+		    $('#tab11').trigger('click');
+		    $('#tab26').trigger('click');
+
+		    $("#colorpicker1").spectrum({ preferredFormat: "hex", color: get_cfg('color_data_active')}) ;
+		    $("#colorpicker2").spectrum({ preferredFormat: "hex", color: get_cfg('color_name_active')}) ;
+		    $("#radio1-" +         get_cfg('DBG_level')).prop('checked', true).checkboxradio("refresh") ;
+		    $("#radio2-" + get_cfg('RF_display_format')).prop('checked', true).checkboxradio("refresh") ;
+		    $("#radio3-" +   get_cfg('RF_display_name')).prop('checked', true).checkboxradio("refresh") ;
+		    $("#radio5-" +    get_cfg('is_interactive')).prop('checked', true).checkboxradio("refresh") ;
+		    $("#radio6-" +          get_cfg('ws_idiom')).prop('checked', true).checkboxradio("refresh") ;
+		    $("#radio7-" +      get_cfg('editor_theme')).prop('checked', true).checkboxradio("refresh") ;
+		    $("#radio9-" +       get_cfg('is_editable')).prop('checked', true).checkboxradio("refresh") ;
+                    $("#select1").val(get_cfg('ICON_theme')).selectmenu("refresh");
+                    $("#select2").val(get_cfg('editor_mode')).selectmenu("refresh");
+                    $("#img_select1").attr("src","images/stop_" + get_cfg('ICON_theme') + ".gif");
+                    set_cpu_cu_size('#eltos_cpu_a','#eltos_cpu_b',get_cfg('CPUCU_size'));
+                    $("#slider2").val(get_cfg('CPUCU_size')).slider("refresh");
+
+                    showhideAsmElements();
+		    $("input:checkbox").click(function(){
+		        var name = $(this).attr("name") ;
+		        var column = "table ." + name ;
+                        if (!$("#" + name).is(':checked'))
+		             $(column).hide() ;
+		        else $(column).show() ;
+		    });
+	    }) ;
+
+            $("div.wsversion").replaceWith(get_cfg('version'));
+
+            var target = $("#asm_table");
+            $("#asm_debugger_container").scroll(function() {
+               target.prop("scrollTop", this.scrollTop).prop("scrollLeft", this.scrollLeft);
+            });
+
+	    init("#states_ALL", "#states_BR", "#io_ALL", "#config_ALL"); 
+	    reset(); 
+
+            $('a[data-toggle="tooltip1"]').tooltip({
+                animated: 'fade',
+                placement: 'bottom',
+                html: true
+            });
+    }
+    catch(err) 
+    {
+        alert("WepSIM was improperly used:\n" + err.message);
+    }
+</script>
+
+</body>
+
+</html>
+
