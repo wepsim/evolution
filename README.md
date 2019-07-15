@@ -1,6 +1,8 @@
-# Evolution of WepSIM 
+#  WepSIM Simulator
 
-+ WepSIM:
+| WepSIM Evolution                    |
+| ----------------------------------- |
+| https://github.com/wepsim/evolution |
 
-   * https://github.com/wepsim/wepsim
-
+  * GNU Lesser General Public License version 3
+  
