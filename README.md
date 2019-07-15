@@ -2,7 +2,7 @@
 
 | WepSIM Evolution                    |
 | ----------------------------------- |
-| https://github.com/wepsim/evolution |
+| https://wepsim.github.io/evolution/ |
 
-  * GNU Lesser General Public License version 3
+**GNU Lesser General Public License version 3**
   
