@@ -1,11 +1,11 @@
 <style>
 .zoom {
-  padding: 50px;
-  transition: transform .2s; /* Animation */
-  margin: 0 auto;
+   padding: 50px;
+   transition: transform .2s;
+   margin: 0 auto;
 }
 
 .zoom:hover {
-  transform: scale(3.0);
+   transform: scale(2.5) translate(15%, -32%);
 }
 </style>
