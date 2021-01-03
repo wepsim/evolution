@@ -13,7 +13,7 @@ var timeline_data1 = [
         },{
             tag: 'h4',
             attr: { cssclass: 'container d-flex w-100 bg-light py-2' },
-            content: '<a href="1.0.10/" class="mx-auto">WepSIM 1.0.10</a>'
+            content: '<a href="1.0.10/" class="mx-auto">WepSIM 1.0.10<i class="ml-2 fas fa-external-link-alt"></i></a>'
         },{
             tag: 'h5',
             attr: { cssclass: 'container d-flex w-100 mx-0 mb-2 bg-warning' },
@@ -32,7 +32,7 @@ var timeline_data1 = [
         },{
             tag: 'h4',
             attr: { cssclass: 'container d-flex w-100 bg-light py-2' },
-            content: '<a href="1.7.2/" class="mx-auto">WepSIM 1.7.2</a>'
+            content: '<a href="1.7.2/" class="mx-auto">WepSIM 1.7.2<i class="ml-2 fas fa-external-link-alt"></i></a>'
         },{
             tag: 'h5',
             attr: { cssclass: 'container d-flex w-100 mx-0 bg-warning' },
@@ -51,7 +51,7 @@ var timeline_data1 = [
         },{
             tag: 'h4',
             attr: { cssclass: 'container d-flex w-100 bg-light py-2' },
-            content: '<a href="1.8.2/" class="mx-auto">WepSIM 1.8.2</a>'
+            content: '<a href="1.8.2/" class="mx-auto">WepSIM 1.8.2<i class="ml-2 fas fa-external-link-alt"></i></a>'
         },{
             tag: 'h5',
             attr: { cssclass: 'container d-flex w-100 mx-0 bg-warning' },
@@ -70,7 +70,7 @@ var timeline_data1 = [
         },{
             tag: 'h4',
             attr: { cssclass: 'container d-flex w-100 bg-light py-2' },
-            content: '<a href="1.9.3/" class="mx-auto">WepSIM 1.9.3</a>'
+            content: '<a href="1.9.3/" class="mx-auto">WepSIM 1.9.3<i class="ml-2 fas fa-external-link-alt"></i></a>'
         },{
             tag: 'h5',
             attr: { cssclass: 'container d-flex w-100 mx-0 bg-warning' },
@@ -89,7 +89,7 @@ var timeline_data1 = [
         },{
             tag: 'h4',
             attr: { cssclass: 'container d-flex w-100 bg-light py-2' },
-            content: '<a href="2.0.10/" class="mx-auto">WepSIM 2.0.10</a>'
+            content: '<a href="2.0.10/" class="mx-auto">WepSIM 2.0.10<i class="ml-2 fas fa-external-link-alt"></i></a>'
         },{
             tag: 'h5',
             attr: { cssclass: 'container d-flex w-100 mx-0 bg-warning' },
@@ -108,7 +108,7 @@ var timeline_data1 = [
         },{
             tag: 'h4',
             attr: { cssclass: 'container d-flex w-100 bg-light py-2' },
-            content: '<a href="2.1.2/" class="mx-auto">WepSIM 2.1.2</a>'
+            content: '<a href="2.1.2/" class="mx-auto">WepSIM 2.1.2<i class="ml-2 fas fa-external-link-alt"></i></a>'
         },{
             tag: 'h5',
             attr: { cssclass: 'container d-flex w-100 mx-0 bg-warning' },
@@ -123,10 +123,10 @@ $(document).ready(function () {
     var timeline_cfg1 = {
 		           // effect: "tada",
                            // effect: 'zoomInUp',
-                           // showGroup: true,
-                           // showMenu: true,
-		           sortDesc: false,
-		           language: "en-us"
+                           showGroup: false,
+                           showMenu:  false,
+		           sortDesc:  false,
+		           language:  "en-us"
 		        } ;
 
     $("#ws_evolution").albeTimeline(timeline_data1, timeline_cfg1) ;
