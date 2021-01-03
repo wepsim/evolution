@@ -15,7 +15,7 @@ var timeline_data1 = [
             tag: 'img',
             attr: {
 		src:      '1.0.10.jpg',
-                cssclass: 'img-responsive img-fluid py-3 zoom',
+                cssclass: 'img-responsive img-fluid py-3',
 		style:    'max-width:85vw !important;',
 		alt:      'screenshot of the wepsim 1.0.10'
             }
@@ -35,7 +35,7 @@ var timeline_data1 = [
             tag: 'img',
             attr: {
 		src:      '1.7.2.jpg',
-                cssclass: 'img-responsive img-fluid py-3 zoom',
+                cssclass: 'img-responsive img-fluid py-3',
 		style:    'max-width:85vw !important;',
 		alt:      'screenshot of the wepsim 1.7.2'
             }
@@ -55,7 +55,7 @@ var timeline_data1 = [
             tag: 'img',
             attr: {
 		src:      '1.8.2.jpg',
-                cssclass: 'img-responsive img-fluid py-3 zoom',
+                cssclass: 'img-responsive img-fluid py-3',
 		style:    'max-width:85vw !important;',
 		alt:      'screenshot of the wepsim 1.8.2'
             }
@@ -75,7 +75,7 @@ var timeline_data1 = [
             tag: 'img',
             attr: {
 		src:      '1.9.3.jpg',
-                cssclass: 'img-responsive img-fluid py-3 zoom',
+                cssclass: 'img-responsive img-fluid py-3',
 		style:    'max-width:85vw !important;',
 		alt:      'screenshot of the wepsim 1.9.3'
             }
@@ -95,7 +95,7 @@ var timeline_data1 = [
             tag: 'img',
             attr: {
 		src:      '2.0.10.jpg',
-                cssclass: 'img-responsive img-fluid py-3 zoom',
+                cssclass: 'img-responsive img-fluid py-3',
 		style:    'max-width:85vw !important;',
 		alt:      'screenshot of the wepsim 2.0.10'
             }
@@ -115,7 +115,7 @@ var timeline_data1 = [
             tag: 'img',
             attr: {
 		src:      '2.1.2.jpg',
-                cssclass: 'img-responsive img-fluid py-3 zoom',
+                cssclass: 'img-responsive img-fluid py-3',
 		style:    'max-width:85vw !important;',
 		alt:      'screenshot of the wepsim 2.1.2'
             }
@@ -127,10 +127,12 @@ var timeline_data1 = [
 $(document).ready(function () {
 
     var timeline_cfg1 = {
-		           effect: "tada",
-		           // showMenu: false,
-		           // sortDesc: false,
-		           // language: "en-us"
+		           // effect: "tada",
+                           // effect: 'zoomInUp',
+                           // showGroup: true,
+                           // showMenu: true,
+		           sortDesc: false,
+		           language: "en-us"
 		        } ;
 
     $("#ws_evolution").albeTimeline(timeline_data1, timeline_cfg1) ;
