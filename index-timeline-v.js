@@ -128,11 +128,11 @@ $(document).ready(function () {
 
     var timeline_cfg1 = {
 		           // effect: "tada",
-                           // effect: 'zoomInUp',
                            // showGroup: true,
-                           // showMenu: true,
+                           effect: 'zoomInUp',
+		           language: "en-us",
 		           sortDesc: false,
-		           language: "en-us"
+                           showMenu: false
 		        } ;
 
     $("#ws_evolution").albeTimeline(timeline_data1, timeline_cfg1) ;

@@ -5,6 +5,11 @@ h3,
 h4,
 h5 { margin-top: 5px; margin-bottom: 5px; line-height: 1; }
 
+ul#timeline-menu { height: 50px; text-align: center; }
+    ul#timeline-menu li { position: relative; float: left; list-style: none; margin: 0px; padding: 0px; }
+        ul#timeline-menu li a { display: block; text-decoration: none; font-size: 16px; padding: 10px; padding-top: 20px; color: black; font-weight: bold; border-bottom: 5px solid transparent; }
+            ul#timeline-menu li a:hover { color: #EF693A; border-bottom: 5px solid #EF693A; font-weight: normal; }
+
 section#timeline { list-style: none; position: relative; margin: 20px; padding-top: 50px; display: inline-block; }
     section#timeline:before { height: 2px; top: auto; bottom: 25px; left: 0; right: 0; position: absolute; content: " "; margin-left: -1.5px; position: absolute; content: " "; background-color: #EF693A; margin-left: -1.5px; }
     section#timeline div[class*="group"],
