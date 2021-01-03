@@ -6,6 +6,6 @@
 }
 
 .zoom:hover {
-   transform: scale(2.5) translate(15%, -32%);
+   transform: scale(2.5) translate(20%, -40%);
 }
 </style>

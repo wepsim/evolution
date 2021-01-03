@@ -7,7 +7,7 @@ var timeline_data1 = [
             tag: 'img',
             attr: {
                 src:      '1.0.10.jpg',
-                cssclass: 'img-responsive img-fluid py-0 my-0 zoom',
+                cssclass: 'img-responsive img-fluid py-0 my-2 zoom',
                 alt:      'screenshot of the wepsim 1.0.10'
             }
         },{
@@ -16,8 +16,8 @@ var timeline_data1 = [
             content: '<a href="1.0.10/" class="mx-auto">WepSIM 1.0.10<i class="ml-2 fas fa-external-link-alt"></i></a>'
         },{
             tag: 'h5',
-            attr: { cssclass: 'container d-flex w-100 mx-0 mb-2 bg-warning' },
-            content: 'The initial release',
+            attr: { cssclass: 'container w-100 mx-0 mb-2 bg-warning' },
+            content: 'The initial release. <br><br>',
         }]
     },
     {
@@ -26,7 +26,7 @@ var timeline_data1 = [
             tag: 'img',
             attr: {
                 src:      '1.7.2.jpg',
-                cssclass: 'img-responsive img-fluid py-0 my-0 zoom',
+                cssclass: 'img-responsive img-fluid py-0 my-2 zoom',
                 alt:      'screenshot of the wepsim 1.7.2'
             }
         },{
@@ -35,8 +35,8 @@ var timeline_data1 = [
             content: '<a href="1.7.2/" class="mx-auto">WepSIM 1.7.2<i class="ml-2 fas fa-external-link-alt"></i></a>'
         },{
             tag: 'h5',
-            attr: { cssclass: 'container d-flex w-100 mx-0 bg-warning' },
-            content: 'Improved UI and faster execution speed',
+            attr: { cssclass: 'container w-100 mx-0 bg-warning' },
+            content: 'Improved UI and faster execution speed.<br>',
         }]
     },
     {
@@ -45,7 +45,7 @@ var timeline_data1 = [
             tag: 'img',
             attr: {
                 src:      '1.8.2.jpg',
-                cssclass: 'img-responsive img-fluid py-0 my-0 zoom',
+                cssclass: 'img-responsive img-fluid py-0 my-2 zoom',
                 alt:      'screenshot of the wepsim 1.8.2'
             }
         },{
@@ -54,8 +54,8 @@ var timeline_data1 = [
             content: '<a href="1.8.2/" class="mx-auto">WepSIM 1.8.2<i class="ml-2 fas fa-external-link-alt"></i></a>'
         },{
             tag: 'h5',
-            attr: { cssclass: 'container d-flex w-100 mx-0 bg-warning' },
-            content: 'Initial support for command line, and the "state" management is added',
+            attr: { cssclass: 'container w-100 mx-0 bg-warning' },
+            content: 'Initial support for command line, and the "state" management is added.',
         }]
     },
     {
@@ -64,7 +64,7 @@ var timeline_data1 = [
             tag: 'img',
             attr: {
                 src:      '1.9.3.jpg',
-                cssclass: 'img-responsive img-fluid py-0 my-0 zoom',
+                cssclass: 'img-responsive img-fluid py-0 my-2 zoom',
                 alt:      'screenshot of the wepsim 1.9.3'
             }
         },{
@@ -73,8 +73,8 @@ var timeline_data1 = [
             content: '<a href="1.9.3/" class="mx-auto">WepSIM 1.9.3<i class="ml-2 fas fa-external-link-alt"></i></a>'
         },{
             tag: 'h5',
-            attr: { cssclass: 'container d-flex w-100 mx-0 bg-warning' },
-            content: 'Support for several CPUs added, command-line and Web UI improvements'
+            attr: { cssclass: 'container w-100 mx-0 bg-warning' },
+            content: 'Support for several CPUs added, command-line and Web UI improvements.'
         }]
     },
     {
@@ -83,7 +83,7 @@ var timeline_data1 = [
             tag: 'img',
             attr: {
                 src:      '2.0.10.jpg',
-                cssclass: 'img-responsive img-fluid py-0 my-0 zoom',
+                cssclass: 'img-responsive img-fluid py-0 my-2 zoom',
                 alt:      'screenshot of the wepsim 2.0.10'
             }
         },{
@@ -92,8 +92,8 @@ var timeline_data1 = [
             content: '<a href="2.0.10/" class="mx-auto">WepSIM 2.0.10<i class="ml-2 fas fa-external-link-alt"></i></a>'
         },{
             tag: 'h5',
-            attr: { cssclass: 'container d-flex w-100 mx-0 bg-warning' },
-            content: 'Introduction of checkpoint, pre-load, and recording support'
+            attr: { cssclass: 'container w-100 mx-0 bg-warning' },
+            content: 'Introduction of checkpoint, pre-load, and recording support.'
         }]
     },
     {
@@ -102,7 +102,7 @@ var timeline_data1 = [
             tag: 'img',
             attr: {
                 src:      '2.1.2.jpg',
-                cssclass: 'img-responsive img-fluid py-0 my-0 zoom',
+                cssclass: 'img-responsive img-fluid py-0 my-2 zoom',
                 alt:      'screenshot of the wepsim 2.1.2'
             }
         },{
@@ -111,8 +111,8 @@ var timeline_data1 = [
             content: '<a href="2.1.2/" class="mx-auto">WepSIM 2.1.2<i class="ml-2 fas fa-external-link-alt"></i></a>'
         },{
             tag: 'h5',
-            attr: { cssclass: 'container d-flex w-100 mx-0 bg-warning' },
-            content: 'Example sets, revised UI based on WebComponents, among other improvements'
+            attr: { cssclass: 'container w-100 mx-0 bg-warning' },
+            content: 'Example sets, revised UI based on WebComponents, among other improvements.'
         }]
     }
 ];
