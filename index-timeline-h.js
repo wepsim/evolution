@@ -131,7 +131,7 @@ var timeline_data1 = [
         },{
             tag: 'h5',
             attr: { cssclass: 'container w-100 mx-0 bg-warning' },
-            content: 'Example sets, revised UI based on WebComponents, among other improvements.'
+            content: 'Added 3D-Led device, RISC-V examples, reworked memory detail panel<br>'
         }]
     }
 ];

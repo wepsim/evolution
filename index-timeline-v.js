@@ -120,6 +120,26 @@ var timeline_data1 = [
 		alt:      'screenshot of the wepsim 2.1.2'
             }
         }]
+    },
+    {
+        time: '2021-12-20',
+        body: [{
+            tag: 'h4',
+            attr: { cssclass: 'container d-flex w-100 bg-light mb-2' },
+            content: '<a href="2.1.6/" class="mx-auto">WepSIM 2.1.6</a>'
+        },{
+            tag: 'h5',
+            attr: { cssclass: 'container d-flex w-100 mx-0 bg-warning' },
+            content: 'Added 3D-Led device, RISC-V examples, reworked memory detail panel<br>'
+        },{
+            tag: 'img',
+            attr: {
+		src:      '2.1.6.jpg',
+                cssclass: 'img-responsive img-fluid py-3',
+		style:    'max-width:85vw !important;',
+		alt:      'screenshot of the wepsim 2.1.6'
+            }
+        }]
     }
 ];
 
