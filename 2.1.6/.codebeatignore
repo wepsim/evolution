@@ -1,0 +1,7 @@
+external/**
+ws_dist/**
+ws_devel/**
+docs/**
+examples/**
+help/**
+images/**
