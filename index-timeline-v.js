@@ -140,6 +140,26 @@ var timeline_data1 = [
 		alt:      'screenshot of the wepsim 2.1.6'
             }
         }]
+    },
+    {
+        time: '2022-12-10',
+        body: [{
+            tag: 'h4',
+            attr: { cssclass: 'container d-flex w-100 bg-light mb-2' },
+            content: '<a href="2.2.0/" class="mx-auto">WepSIM 2.2.0</a>'
+        },{
+            tag: 'h5',
+            attr: { cssclass: 'container d-flex w-100 mx-0 bg-warning' },
+            content: 'New Hardware Performance Counter, updated examples, bootstrap 5.2.x<br>'
+        },{
+            tag: 'img',
+            attr: {
+		src:      '2.2.0.png',
+                cssclass: 'img-responsive img-fluid py-3',
+		style:    'max-width:85vw !important;',
+		alt:      'screenshot of the wepsim 2.2.0'
+            }
+        }]
     }
 ];
 

@@ -133,6 +133,25 @@ var timeline_data1 = [
             attr: { cssclass: 'container w-100 mx-0 bg-warning' },
             content: 'Added 3D-Led device, RISC-V examples, reworked memory detail panel<br>'
         }]
+    },
+    {
+        time: '2022-12-10',
+        body: [{
+            tag: 'img',
+            attr: {
+                src:      '2.2.0.png',
+                cssclass: 'img-responsive img-fluid py-0 my-2 zoom',
+                alt:      'screenshot of the wepsim 2.2.0'
+            }
+        },{
+            tag: 'h4',
+            attr: { cssclass: 'container d-flex w-100 bg-light py-2' },
+            content: '<a href="2.2.0/" class="mx-auto">WepSIM 2.2.0<i class="ml-2 fas fa-external-link-alt"></i></a>'
+        },{
+            tag: 'h5',
+            attr: { cssclass: 'container w-100 mx-0 bg-warning' },
+            content: 'New Hardware Performance Counter, updated examples, bootstrap 5.2.x<br>'
+        }]
     }
 ];
 
