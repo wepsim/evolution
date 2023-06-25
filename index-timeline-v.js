@@ -160,6 +160,25 @@ var timeline_data1 = [
 		alt:      'screenshot of the wepsim 2.2.0'
             }
         }]
+    },
+    {
+        time: '2023-02-22',
+        body: [{
+            tag: 'img',
+            attr: {
+                src:      '2.2.2.png',
+                cssclass: 'img-responsive img-fluid py-0 my-2 zoom',
+                alt:      'screenshot of the wepsim 2.2.2'
+            }
+        },{
+            tag: 'h4',
+            attr: { cssclass: 'container d-flex w-100 bg-light py-2' },
+            content: '<a href="2.2.2/" class="mx-auto">WepSIM 2.2.2<i class="ml-2 fas fa-external-link-alt"></i></a>'
+        },{
+            tag: 'h5',
+            attr: { cssclass: 'container w-100 mx-0 bg-warning' },
+            content: 'Several minor updates for 2.2.0<br>'
+        }]
     }
 ];
 
@@ -172,7 +191,8 @@ $(document).ready(function () {
                            effect: 'zoomInUp',
 		           language: "en-us",
 		           sortDesc: false,
-                           showMenu: false
+                           showMenu: false,
+                           sortDesc:  true
 		        } ;
 
     $("#ws_evolution").albeTimeline(timeline_data1, timeline_cfg1) ;
