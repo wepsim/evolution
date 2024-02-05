@@ -179,6 +179,25 @@ var timeline_data1 = [
             attr: { cssclass: 'container w-100 mx-0 bg-warning' },
             content: 'Several minor updates for 2.2.0<br>'
         }]
+    },
+    {
+        time: '2023-02-05',
+        body: [{
+            tag: 'img',
+            attr: {
+                src:      '2.3.0.png',
+                cssclass: 'img-responsive img-fluid py-0 my-2 zoom',
+                alt:      'screenshot of the wepsim 2.3.0'
+            }
+        },{
+            tag: 'h4',
+            attr: { cssclass: 'container d-flex w-100 bg-light py-2' },
+            content: '<a href="2.3.0/" class="mx-auto">WepSIM 2.3.0<i class="ml-2 fas fa-external-link-alt"></i></a>'
+        },{
+            tag: 'h5',
+            attr: { cssclass: 'container w-100 mx-0 bg-warning' },
+            content: 'Initial new version of RV CPU and the new-generation assembly compiler (in beta)<br>'
+        }]
     }
 ];
 
