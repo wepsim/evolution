@@ -1,6 +1,6 @@
 
 //JSON Object
-var timeline_data1 = [
+var timeline_data2 = [
     {
         time: '2025-11-28',
         body: [{
@@ -133,7 +133,10 @@ var timeline_data1 = [
             attr: { cssclass: 'container w-100 mx-0 bg-warning' },
             content: 'Introduction of checkpoint, pre-load, and recording support.'
         }]
-    },
+    }
+];
+
+var timeline_data1 = [
     {
         time: '2018-11-25',
         body: [{ 
@@ -215,6 +218,18 @@ var timeline_data1 = [
 
 $(document).ready(function () {
 
+    var timeline_cfg2 = {
+		           // effect: "tada",
+                           // effect: 'zoomInUp',
+                           showGroup: false,
+                           showMenu:  false,
+		           sortDesc:  false,
+		           language:  "en-us",
+                           sortDesc:  true
+		        } ;
+
+    $("#ws_evolution_2").albeTimeline(timeline_data2, timeline_cfg2) ;
+
     var timeline_cfg1 = {
 		           // effect: "tada",
                            // effect: 'zoomInUp',
@@ -225,7 +240,7 @@ $(document).ready(function () {
                            sortDesc:  true
 		        } ;
 
-    $("#ws_evolution").albeTimeline(timeline_data1, timeline_cfg1) ;
+    $("#ws_evolution_1").albeTimeline(timeline_data1, timeline_cfg1) ;
 
 });
 
