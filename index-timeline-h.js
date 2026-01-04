@@ -51,7 +51,7 @@ var timeline_data2 = [
         },{
             tag: 'h4',
             attr: { cssclass: 'container d-flex w-100 bg-light py-2' },
-            content: '<a href="2.2.2/" class="mx-auto">WepSIM 2.2.2<i class="ml-2 fas fa-external-link-alt"></i></a>'
+            content: '<a href="https://wepsim.github.io/wepsim-2.2.2/" class="mx-auto">WepSIM 2.2.2<i class="ml-2 fas fa-external-link-alt"></i></a>'
         },{
             tag: 'h5',
             attr: { cssclass: 'container w-100 mx-0 bg-warning' },
@@ -70,7 +70,7 @@ var timeline_data2 = [
         },{
             tag: 'h4',
             attr: { cssclass: 'container d-flex w-100 bg-light py-2' },
-            content: '<a href="2.2.0/" class="mx-auto">WepSIM 2.2.0<i class="ml-2 fas fa-external-link-alt"></i></a>'
+            content: '<a href="https://wepsim.github.io/wepsim-2.2.0/" class="mx-auto">WepSIM 2.2.0<i class="ml-2 fas fa-external-link-alt"></i></a>'
         },{
             tag: 'h5',
             attr: { cssclass: 'container w-100 mx-0 bg-warning' },
@@ -89,7 +89,7 @@ var timeline_data2 = [
         },{
             tag: 'h4',
             attr: { cssclass: 'container d-flex w-100 bg-light py-2' },
-            content: '<a href="2.1.6/" class="mx-auto">WepSIM 2.1.6<i class="ml-2 fas fa-external-link-alt"></i></a>'
+            content: '<a href="https://wepsim.github.io/wepsim-2.1.6/" class="mx-auto">WepSIM 2.1.6<i class="ml-2 fas fa-external-link-alt"></i></a>'
         },{
             tag: 'h5',
             attr: { cssclass: 'container w-100 mx-0 bg-warning' },
