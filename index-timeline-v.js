@@ -106,7 +106,7 @@ var timeline_data1 = [
         body: [{
             tag: 'h4',
             attr: { cssclass: 'container d-flex w-100 bg-light mb-2' },
-            content: '<a href="2.1.2/" class="mx-auto">WepSIM 2.1.2</a>'
+            content: '<a href="https://wepsim.github.io/wepsim-2.1.2/" class="mx-auto">WepSIM 2.1.2<i class="ml-2 fas fa-external-link-alt"></i></a>'
         },{
             tag: 'h5',
             attr: { cssclass: 'container d-flex w-100 mx-0 bg-warning' },
